@@ -51,11 +51,10 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
-
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isGrounded = false; // 跳跃后立即设置为不接触地面
         }
     }
 
