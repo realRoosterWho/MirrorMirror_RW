@@ -1154,29 +1154,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4834560138751089848, guid: d76719aae99d94a988c13f6997dcd84f,
+    - target: {fileID: 5725673675052204806, guid: d76719aae99d94a988c13f6997dcd84f,
         type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834560138751089848, guid: d76719aae99d94a988c13f6997dcd84f,
-        type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834560138751089848, guid: d76719aae99d94a988c13f6997dcd84f,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834560138751089848, guid: d76719aae99d94a988c13f6997dcd84f,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834560138751089848, guid: d76719aae99d94a988c13f6997dcd84f,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5828156454804618794, guid: d76719aae99d94a988c13f6997dcd84f,
