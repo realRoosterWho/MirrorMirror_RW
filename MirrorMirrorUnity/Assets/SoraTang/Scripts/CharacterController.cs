@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;       // 移动速度
     public float turnSpeed = 5f;       // 转向速度
     public float jumpForce = 5f;       // 跳跃力量
-    public string groundTag = "Ground"; // 地面的Tag
+    public LayerMask groundLayer;      // 地面的Layer
     public string ladderTag = "Ladder"; // 梯子的Tag
     public float ladderSpeed = 3f;     // 在梯子上移动的速度
 
@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = true; // 开启重力
+
+        // 永久锁定ZX轴的旋转
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     void Update()
@@ -25,6 +28,9 @@ public class PlayerController : MonoBehaviour
         Turn();
         Jump();
         ClimbLadder();
+
+        // 检测是否在地面上
+        CheckGrounded();
     }
 
     void Move()
@@ -42,7 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         float turn = Input.GetAxis("Horizontal");
 
-        if (turn != 0)
+        if (turn != 0 && !isOnLadder)
         {
             Quaternion targetRotation = Quaternion.Euler(0, turn * turnSpeed, 0);
             transform.rotation = Quaternion.Slerp(transform.rotation, transform.rotation * targetRotation, Time.deltaTime);
@@ -64,7 +70,7 @@ public class PlayerController : MonoBehaviour
         {
             float vertical = Input.GetAxis("Vertical");
             rb.useGravity = false; // 关闭重力
-            rb.velocity = new Vector3(rb.velocity.x, vertical * ladderSpeed, rb.velocity.z);
+            rb.velocity = new Vector3(0, vertical * ladderSpeed, 0); // 只在Y轴上移动
         }
         else
         {
@@ -72,13 +78,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void CheckGrounded()
     {
-        if (collision.collider.CompareTag(groundTag))
+        RaycastHit hit;
+        float rayDistance = 1.1f; // 射线距离，略大于角色底部到地面的距离
+
+        // 向下发射一条射线，检测是否击中地面
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, rayDistance, groundLayer))
         {
             isGrounded = true;
         }
+        else
+        {
+            isGrounded = false;
+        }
+    }
 
+    void OnCollisionEnter(Collision collision)
+    {
         if (collision.collider.CompareTag(ladderTag))
         {
             isOnLadder = true;
@@ -87,11 +104,6 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.collider.CompareTag(groundTag))
-        {
-            isGrounded = false;
-        }
-
         if (collision.collider.CompareTag(ladderTag))
         {
             isOnLadder = false;
