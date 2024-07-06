@@ -37,11 +37,8 @@ public class PlayerController : MonoBehaviour
     {
         float moveZ = Input.GetAxis("Vertical");
 
-        if (!isOnLadder)
-        {
-            Vector3 move = transform.forward * moveZ;
-            rb.MovePosition(transform.position + move * moveSpeed * Time.deltaTime);
-        }
+        Vector3 move = transform.forward * moveZ;
+        rb.MovePosition(transform.position + move * moveSpeed * Time.deltaTime);
     }
 
     void Turn()
@@ -68,9 +65,12 @@ public class PlayerController : MonoBehaviour
     {
         if (isOnLadder)
         {
-            float vertical = Input.GetAxis("Vertical");
+            float moveY = Input.GetAxis("Vertical");
+            float moveX = Input.GetAxis("Horizontal");
+
             rb.useGravity = false; // 关闭重力
-            rb.velocity = new Vector3(0, vertical * ladderSpeed, 0); // 只在Y轴上移动
+            Vector3 climbVelocity = new Vector3(-moveX * ladderSpeed, moveY * ladderSpeed, 0);
+            rb.velocity = climbVelocity;
         }
         else
         {
