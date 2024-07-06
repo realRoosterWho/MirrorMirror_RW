@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded;
     private bool isOnLadder;
+    private float currentTurnSpeed;
 
     void Start()
     {
@@ -47,8 +48,14 @@ public class PlayerController : MonoBehaviour
 
         if (turn != 0 && !isOnLadder)
         {
-            Quaternion targetRotation = Quaternion.Euler(0, turn * turnSpeed, 0);
+            currentTurnSpeed = turn * turnSpeed;
+            Quaternion targetRotation = Quaternion.Euler(0, currentTurnSpeed, 0);
             transform.rotation = Quaternion.Slerp(transform.rotation, transform.rotation * targetRotation, Time.deltaTime);
+        }
+        else
+        {
+            // 如果没有按下转向键，立即停止旋转
+            currentTurnSpeed = 0;
         }
     }
 
