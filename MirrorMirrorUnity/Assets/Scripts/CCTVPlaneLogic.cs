@@ -13,7 +13,7 @@ public class CCTVPlaneLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AdjustPlaneSizeAndRenderTexture();
+        AdjustPlaneSizeAndRenderTexture(true);
     }
 
     // 调整摄像机的视野以匹配RenderTexture的宽高比
@@ -94,7 +94,8 @@ public class CCTVPlaneLogic : MonoBehaviour
         {
             planeRenderer.material.mainTexture = renderTexture;
         }
-        else if(isRender)
+
+        if(isRender)
         {
             planeRenderer.material.mainTexture = renderTexture;
         }
