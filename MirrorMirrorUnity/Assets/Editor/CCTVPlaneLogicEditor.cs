@@ -17,6 +17,16 @@ public class CCTVPlaneLogicEditor : Editor
             isAddingCCTVPlane = true;
             SceneView.duringSceneGui += OnSceneGUI;
         }
+
+        if (GUILayout.Button("Update RenderTextureON"))
+        {
+            cctvLogic.UpdateRenderTexture(true);
+        }
+        
+        if (GUILayout.Button("Update RenderTextureOff"))
+        {
+            cctvLogic.UpdateRenderTexture(false);
+        }
     }
 
     private void OnSceneGUI(SceneView sceneView)
