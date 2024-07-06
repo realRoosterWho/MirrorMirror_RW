@@ -6,9 +6,51 @@ public class CCTVPlaneLogic : MonoBehaviour
     public GameObject m_Plane; // 公开的目标物体变量
     public bool invertDimensions; // 公开的布尔变量决定是否调转宽高
     private RenderTexture renderTexture; // RenderTexture变量
+    public GameObject cctvPrefab; // CCTV Prefab
+    
+    public bool isSummonRevert = false;
 
     // Start is called before the first frame update
     void Start()
+    {
+        AdjustPlaneSizeAndRenderTexture();
+    }
+
+    // 调整摄像机的视野以匹配RenderTexture的宽高比
+    void AdjustCameraViewport(float planeWidth, float planeHeight)
+    {
+        float targetAspect = planeWidth / planeHeight;
+        float windowAspect = (float)Screen.width / (float)Screen.height;
+        float scaleHeight = windowAspect / targetAspect;
+
+        if (scaleHeight < 1.0f)
+        {
+            Rect rect = myCamera.rect;
+
+            rect.width = 1.0f;
+            rect.height = scaleHeight;
+            rect.x = 0;
+            rect.y = (1.0f - scaleHeight) / 2.0f;
+
+            myCamera.rect = rect;
+        }
+        else
+        {
+            float scaleWidth = 1.0f / scaleHeight;
+
+            Rect rect = myCamera.rect;
+
+            rect.width = scaleWidth;
+            rect.height = 1.0f;
+            rect.x = (1.0f - scaleWidth) / 2.0f;
+            rect.y = 0;
+
+            myCamera.rect = rect;
+        }
+    }
+    
+    // 提取的公共方法
+    public void AdjustPlaneSizeAndRenderTexture()
     {
         // 获取平面的Renderer组件并读取其尺寸
         Renderer planeRenderer = m_Plane.GetComponent<Renderer>();
@@ -61,43 +103,93 @@ public class CCTVPlaneLogic : MonoBehaviour
         // 调整摄像机的视野
         // AdjustCameraViewport(planeWidth, planeHeight);
     }
+    // 在选中物体的表面添加CCTV Plane Prefab
 
-    // 调整摄像机的视野以匹配RenderTexture的宽高比
-    void AdjustCameraViewport(float planeWidth, float planeHeight)
+// 在选中物体的表面添加CCTV Plane Prefab
+    // 在选中物体的表面添加CCTV Plane Prefab
+public void AddCCTVPlaneOnSurface(GameObject targetObject, Vector3 hitPoint, Vector3 hitNormal)
     {
-        float targetAspect = planeWidth / planeHeight;
-        float windowAspect = (float)Screen.width / (float)Screen.height;
-        float scaleHeight = windowAspect / targetAspect;
-
-        if (scaleHeight < 1.0f)
+        if (cctvPrefab == null)
         {
-            Rect rect = myCamera.rect;
+            Debug.LogError("CCTV Prefab is not assigned!");
+            return;
+        }
 
-            rect.width = 1.0f;
-            rect.height = scaleHeight;
-            rect.x = 0;
-            rect.y = (1.0f - scaleHeight) / 2.0f;
+        Renderer targetRenderer = targetObject.GetComponent<Renderer>();
+        if (targetRenderer == null)
+        {
+            Debug.LogError("Target object does not have a Renderer component!");
+            return;
+        }
 
-            myCamera.rect = rect;
+        // Instantiate the prefab
+        GameObject cctvInstance = Instantiate(cctvPrefab);
+
+        // Find the plane child object and get its Renderer component
+        Transform planeTransform = cctvInstance.GetComponent<CCTVPlaneLogic>().m_Plane.transform;
+        if (planeTransform == null)
+        {
+            Debug.LogError("Plane child object not found in the prefab!");
+            return;
+        }
+
+        Renderer cctvRenderer = planeTransform.GetComponent<Renderer>();
+        if (cctvRenderer == null)
+        {
+            Debug.LogError("Plane child object does not have a Renderer component!");
+            return;
+        }
+
+        // Determine the dimensions and center based on the hit normal
+        float planeWidth, planeHeight;
+        Vector3 planeCenter;
+        Quaternion rotation = Quaternion.identity;
+        float offset = 0.01f; // 微小的偏移量
+
+        if (Mathf.Abs(hitNormal.y) > Mathf.Abs(hitNormal.x) && Mathf.Abs(hitNormal.y) > Mathf.Abs(hitNormal.z))
+        {
+            // Hit on top or bottom face
+            planeWidth = targetRenderer.bounds.size.x;
+            planeHeight = targetRenderer.bounds.size.z;
+            planeCenter = targetRenderer.bounds.center + new Vector3(0, hitNormal.y * targetRenderer.bounds.extents.y, 0);
+            rotation = Quaternion.LookRotation(hitNormal, Vector3.up) * Quaternion.Euler(90, 0, 0); // 旋转
+            Debug.Log("x,z");
+        }
+        else if (Mathf.Abs(hitNormal.x) > Mathf.Abs(hitNormal.y) && Mathf.Abs(hitNormal.x) > Mathf.Abs(hitNormal.z))
+        {
+            // Hit on left or right face
+            planeWidth = targetRenderer.bounds.size.z;
+            planeHeight = targetRenderer.bounds.size.y;
+            planeCenter = targetRenderer.bounds.center + new Vector3(hitNormal.x * targetRenderer.bounds.extents.x, 0, 0);
+            rotation = Quaternion.LookRotation(hitNormal, Vector3.up) * Quaternion.Euler(90, 0, 0);
+            Debug.Log("z,y");
         }
         else
         {
-            float scaleWidth = 1.0f / scaleHeight;
-
-            Rect rect = myCamera.rect;
-
-            rect.width = scaleWidth;
-            rect.height = 1.0f;
-            rect.x = (1.0f - scaleWidth) / 2.0f;
-            rect.y = 0;
-
-            myCamera.rect = rect;
+            // Hit on front or back face
+            planeWidth = targetRenderer.bounds.size.x;
+            planeHeight = targetRenderer.bounds.size.y;
+            planeCenter = targetRenderer.bounds.center + new Vector3(0, 0, hitNormal.z * targetRenderer.bounds.extents.z);
+            rotation = Quaternion.LookRotation(hitNormal, Vector3.up) * Quaternion.Euler(-90, 0, 0);
+            Debug.Log("x,y");
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+
+
+        // Unity standard Plane size is 10x10 units, adjust the scale accordingly
+        float standardPlaneSize = 10.0f;
+        planeTransform.localScale = new Vector3(planeWidth / standardPlaneSize, 1.0f, planeHeight / standardPlaneSize); // Adjust scale based on standard size
+
+        // Adjust the position and rotation of the plane to cover the hit surface
+        planeTransform.position = planeCenter + hitNormal * offset; // 添加微小的偏移量
+        planeTransform.rotation = rotation;
         
-    }
+        
+        if (isSummonRevert)
+        {
+            cctvInstance.GetComponent<CCTVPlaneLogic>().invertDimensions = true;
+        }
+        cctvInstance.GetComponent<CCTVPlaneLogic>().AdjustPlaneSizeAndRenderTexture();
+    }    
+    
 }
