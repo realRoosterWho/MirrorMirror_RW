@@ -145,9 +145,15 @@ MonoBehaviour:
   HasThumbnail: 0
   CurrentStatePreset: " <sbspreset pkgurl=\"pkg://tiles_008/tiles_008\" label=\"\"
     >\n  <presetinput identifier=\"$outputsize\" uid=\"1378578069\" type=\"8\" value=\"10,10\"
-    />\n  <presetinput identifier=\"Tiles_Amount_X\" uid=\"686085296\" type=\"4\"
-    value=\"20\" />\n  <presetinput identifier=\"Tiles_Amount_Y\" uid=\"686085297\"
-    type=\"4\" value=\"20\" />\n </sbspreset>\n"
+    />\n  <presetinput identifier=\"Relief_Balance\" uid=\"1467361785\" type=\"0\"
+    value=\"25.1\" />\n  <presetinput identifier=\"Normal\" uid=\"1467361359\" type=\"0\"
+    value=\"0\" />\n  <presetinput identifier=\"Emboss\" uid=\"1467361296\" type=\"0\"
+    value=\"0\" />\n  <presetinput identifier=\"Tiles_Amount_Y\" uid=\"686085297\"
+    type=\"4\" value=\"7\" />\n  <presetinput identifier=\"Tiles_01_Color\" uid=\"686508029\"
+    type=\"2\" value=\"1,1,1\" />\n  <presetinput identifier=\"Tiles_02_Color\" uid=\"686508030\"
+    type=\"2\" value=\"1,1,1\" />\n  <presetinput identifier=\"Tiles_03_Color\" uid=\"686508024\"
+    type=\"2\" value=\"1,1,1\" />\n  <presetinput identifier=\"Tiles_04_Color\" uid=\"686508025\"
+    type=\"2\" value=\"1,1,1\" />\n </sbspreset>\n"
   IsRuntimeOnly: 0
   GenerateAllOutputs: 0
   GenerateAllMipmaps: 1
@@ -256,7 +262,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 0
           WidgetType: 1
-        Data: 32
+        Data: 25.1
         NumericalDescription:
           DefaultValue: 32
           MinValue: 0
@@ -276,7 +282,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 0
           WidgetType: 1
-        Data: 0.5
+        Data: 0
         NumericalDescription:
           DefaultValue: 0.5
           MinValue: 0
@@ -296,7 +302,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 0
           WidgetType: 1
-        Data: 0.5
+        Data: 0
         NumericalDescription:
           DefaultValue: 0.5
           MinValue: 0
@@ -416,7 +422,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 4
           WidgetType: 1
-        Data: 20
+        Data: 10
         NumericalDescription:
           DefaultValue: 10
           MinValue: 0
@@ -438,7 +444,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 4
           WidgetType: 1
-        Data: 20
+        Data: 7
         NumericalDescription:
           DefaultValue: 10
           MinValue: 0
@@ -520,7 +526,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 2
           WidgetType: 3
-        Data: {x: 0.75, y: 0.74, z: 0.71}
+        Data: {x: 1, y: 1, z: 1}
         NumericalDescription:
           DefaultValue: {x: 0.75, y: 0.74, z: 0.71}
           MinValue: {x: 0, y: 0, z: 0}
@@ -540,7 +546,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 2
           WidgetType: 3
-        Data: {x: 0.4549, y: 0.5254, z: 0.5417}
+        Data: {x: 1, y: 1, z: 1}
         NumericalDescription:
           DefaultValue: {x: 0.4549, y: 0.5254, z: 0.5417}
           MinValue: {x: 0, y: 0, z: 0}
@@ -560,7 +566,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 2
           WidgetType: 3
-        Data: {x: 0.698, y: 0.6352, z: 0.5803}
+        Data: {x: 1, y: 1, z: 1}
         NumericalDescription:
           DefaultValue: {x: 0.698, y: 0.6352, z: 0.5803}
           MinValue: {x: 0, y: 0, z: 0}
@@ -580,7 +586,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 2
           WidgetType: 3
-        Data: {x: 0.6078, y: 0.5333, z: 0.498}
+        Data: {x: 1, y: 1, z: 1}
         NumericalDescription:
           DefaultValue: {x: 0.6078, y: 0.5333, z: 0.498}
           MinValue: {x: 0, y: 0, z: 0}

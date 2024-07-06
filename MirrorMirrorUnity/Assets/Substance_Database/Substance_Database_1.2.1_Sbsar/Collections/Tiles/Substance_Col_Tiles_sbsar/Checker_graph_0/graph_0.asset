@@ -143,7 +143,12 @@ MonoBehaviour:
   EnablePhysicalSize: 0
   Thumbnail: 
   HasThumbnail: 0
-  CurrentStatePreset: 
+  CurrentStatePreset: " <sbspreset pkgurl=\"pkg://Checker/Checker\" label=\"\" >\n 
+    <presetinput identifier=\"$outputsize\" uid=\"3865230125\" type=\"8\" value=\"10,10\"
+    />\n  <presetinput identifier=\"Tiles_Color_1\" uid=\"2629589238\" type=\"2\"
+    value=\"1,1,1\" />\n  <presetinput identifier=\"Tiles_Color_2\" uid=\"2629589232\"
+    type=\"2\" value=\"1,1,1\" />\n  <presetinput identifier=\"Mortar_Color\" uid=\"2629589323\"
+    type=\"2\" value=\"1,1,1\" />\n </sbspreset>\n"
   IsRuntimeOnly: 0
   GenerateAllOutputs: 0
   GenerateAllMipmaps: 1
@@ -539,7 +544,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 2
           WidgetType: 3
-        Data: {x: 0.35, y: 0.34, z: 0.33}
+        Data: {x: 1, y: 1, z: 1}
         NumericalDescription:
           DefaultValue: {x: 0.35, y: 0.34, z: 0.33}
           MinValue: {x: 0, y: 0, z: 0}
@@ -559,7 +564,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 2
           WidgetType: 3
-        Data: {x: 0.86, y: 0.86, z: 0.85}
+        Data: {x: 1, y: 1, z: 1}
         NumericalDescription:
           DefaultValue: {x: 0.86, y: 0.86, z: 0.85}
           MinValue: {x: 0, y: 0, z: 0}
@@ -579,7 +584,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 2
           WidgetType: 3
-        Data: {x: 0.1, y: 0.1, z: 0.1}
+        Data: {x: 1, y: 1, z: 1}
         NumericalDescription:
           DefaultValue: {x: 0.1, y: 0.1, z: 0.1}
           MinValue: {x: 0, y: 0, z: 0}

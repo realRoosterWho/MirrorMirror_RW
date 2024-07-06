@@ -1,0 +1,466 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed5864476f84ce4b85454db09ca4eaa, type: 3}
+  m_Name: graph_0
+  m_EditorClassIdentifier: 
+  AssetPath: Assets/Substance_Database/Substance_Database_1.2.1_Sbsar/Collections/Bricks/Substance_Col_Bricks_sbsar/Marble_Wall_01.sbsar
+  RawData: {fileID: -244192453324840774, guid: 50212d4fb3ae1184bb2703108f836308, type: 3}
+  Name: graph_0
+  IsRoot: 1
+  FlagedForDelete: 0
+  GUID: 8bf07c74-21f7-418e-923a-7fd4697a27df
+  Index: 0
+  Input:
+  - rid: 7947978277483185084
+  - rid: 7947978277483185085
+  - rid: 7947978277483185086
+  - rid: 7947978277483185087
+  - rid: 7947978277483185088
+  - rid: 7947978277483185089
+  - rid: 7947978277483185090
+  - rid: 7947978277483185091
+  - rid: 7947978277483185092
+  - rid: 7947978277483185093
+  - rid: 7947978277483185094
+  - rid: 7947978277483185095
+  - rid: 7947978277483185096
+  - rid: 7947978277483185097
+  - rid: 7947978277483185098
+  Output:
+  - Index: 0
+    VirtualOutputIndex: 6
+    Description:
+      Identifier: Diffuse
+      Label: Diffuse
+      Index: 0
+      Type: 8
+      Channel: diffuse
+    OutputTexture: {fileID: 2800000, guid: ec2ca6cb4e9fd2e4daca9643131f1ecb, type: 3}
+    sRGB: 1
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: _BaseMap
+  - Index: 1
+    VirtualOutputIndex: 7
+    Description:
+      Identifier: Specular
+      Label: Specular
+      Index: 1
+      Type: 8
+      Channel: specular
+    OutputTexture: {fileID: 2800000, guid: 82c8e3d4a553bb147a28dd635a75d634, type: 3}
+    sRGB: 1
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: _SpecGlossMap
+  - Index: 2
+    VirtualOutputIndex: 8
+    Description:
+      Identifier: Normal
+      Label: Normal
+      Index: 2
+      Type: 8
+      Channel: normal
+    OutputTexture: {fileID: 2800000, guid: 621995bbf55cfb34a82299c0611ce82c, type: 3}
+    sRGB: 0
+    IsVirtual: 0
+    IsAlphaAssignable: 0
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: _BumpMap
+  - Index: 3
+    VirtualOutputIndex: 9
+    Description:
+      Identifier: Bump
+      Label: Bump
+      Index: 3
+      Type: 8
+      Channel: bump
+    OutputTexture: {fileID: 0}
+    sRGB: 0
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: 
+  - Index: 4
+    VirtualOutputIndex: 10
+    Description:
+      Identifier: Displacement
+      Label: Displacement
+      Index: 4
+      Type: 8
+      Channel: displacement
+    OutputTexture: {fileID: 0}
+    sRGB: 0
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: 
+  - Index: 5
+    VirtualOutputIndex: 11
+    Description:
+      Identifier: Height
+      Label: Height
+      Index: 5
+      Type: 8
+      Channel: height
+    OutputTexture: {fileID: 2800000, guid: c68a74e3d5618d14cadf3cfc02065e64, type: 3}
+    sRGB: 1
+    IsVirtual: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+    MaterialTextureTarget: _ParallaxMap
+  HasPhysicalSize: 0
+  PhysicalSize: {x: 0, y: 0, z: 0}
+  EnablePhysicalSize: 0
+  Thumbnail: 
+  HasThumbnail: 0
+  CurrentStatePreset: 
+  IsRuntimeOnly: 0
+  GenerateAllOutputs: 0
+  GenerateAllMipmaps: 1
+  OutputMaterial: {fileID: 2100000, guid: 1bc30caae8eb18a48a1b701f05efe1c9, type: 2}
+  DefaultPreset: " <sbspreset pkgurl=\"pkg://Marble_Wall_01/Marble_Wall_01\" label=\"\"
+    >\n  <presetinput identifier=\"$outputsize\" uid=\"1387558937\" type=\"8\" value=\"10,10\"
+    />\n </sbspreset>\n"
+  MaterialShader: Universal Render Pipeline/Lit
+  RenderTextures: 0
+  OutputRemaped: 0
+  Presets: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 7947978277483185084
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 0
+        Description:
+          Identifier: $normalformat
+          Label: $normalformat
+          GuiGroup: 
+          GuiDescription: 
+          Type: 4
+          WidgetType: 0
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185085
+      type: {class: SubstanceInputInt2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 1
+        Description:
+          Identifier: $outputsize
+          Label: $outputsize
+          GuiGroup: 
+          GuiDescription: 
+          Type: 5
+          WidgetType: 0
+        Data: {x: 10, y: 10}
+        NumericalDescription:
+          DefaultValue: {x: 8, y: 8}
+          MinValue: {x: 0, y: 0}
+          MaxValue: {x: 1, y: 1}
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185086
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 2
+        Description:
+          Identifier: $randomseed
+          Label: $randomseed
+          GuiGroup: 
+          GuiDescription: 
+          Type: 4
+          WidgetType: 0
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185087
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 3
+        Description:
+          Identifier: Hue_Shift
+          Label: Hue_Shift
+          GuiGroup: 
+          GuiDescription: Adjusts the global color range. Editable.
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185088
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 4
+        Description:
+          Identifier: Saturation
+          Label: Saturation
+          GuiGroup: 
+          GuiDescription: Adjusts the level of colour purity of the texture. Editable.
+          Type: 0
+          WidgetType: 1
+        Data: 0.5
+        NumericalDescription:
+          DefaultValue: 0.5
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0
+          SliderClamp: 1
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185089
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 5
+        Description:
+          Identifier: Luminosity
+          Label: Luminosity
+          GuiGroup: 
+          GuiDescription: Adjusts the brightness level of the texture. Editable.
+          Type: 0
+          WidgetType: 1
+        Data: 0.5
+        NumericalDescription:
+          DefaultValue: 0.5
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0
+          SliderClamp: 1
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185090
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 6
+        Description:
+          Identifier: Emboss
+          Label: Emboss
+          GuiGroup: 
+          GuiDescription: Adjusts the level of detail enhancement of the texture.
+            Editable.
+          Type: 0
+          WidgetType: 1
+        Data: 5
+        NumericalDescription:
+          DefaultValue: 5
+          MinValue: -10
+          MaxValue: 10
+          SliderStep: 0
+          SliderClamp: 1
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185091
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 7
+        Description:
+          Identifier: Angle
+          Label: Angle
+          GuiGroup: 
+          GuiDescription: Adjusts the angle of diffuse in relation to the level of
+            Emboss applied to the texture. Editable.
+          Type: 0
+          WidgetType: 2
+        Data: 0.125
+        NumericalDescription:
+          DefaultValue: 0.125
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185092
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 8
+        Description:
+          Identifier: Contrast
+          Label: Contrast
+          GuiGroup: 
+          GuiDescription: Adjusts the gradations between the light and dark areas
+            of the texture. Editable.
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0
+          SliderClamp: 1
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185093
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 9
+        Description:
+          Identifier: Normal
+          Label: Normal
+          GuiGroup: 
+          GuiDescription: Adjusts the attenuation of the normals of the texture.
+            Editable.
+          Type: 0
+          WidgetType: 1
+        Data: 0.5
+        NumericalDescription:
+          DefaultValue: 0.5
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0
+          SliderClamp: 1
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185094
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 10
+        Description:
+          Identifier: Depth
+          Label: Depth
+          GuiGroup: 
+          GuiDescription: Adjusts the attenuation of depth of the texture. Editable.
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0
+          SliderClamp: 1
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185095
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 11
+        Description:
+          Identifier: Relief_Balance
+          Label: Relief_Balance
+          GuiGroup: 
+          GuiDescription: Adjusts the balance of details between Bump and Displacement.
+            Editable.
+          Type: 0
+          WidgetType: 1
+        Data: 32
+        NumericalDescription:
+          DefaultValue: 32
+          MinValue: 0
+          MaxValue: 32
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185096
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 12
+        Description:
+          Identifier: Tile_X
+          Label: Tile_X
+          GuiGroup: 
+          GuiDescription: 
+          Type: 4
+          WidgetType: 1
+        Data: 3
+        NumericalDescription:
+          DefaultValue: 3
+          MinValue: 2
+          MaxValue: 40
+          SliderStep: 0
+          SliderClamp: 1
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185097
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 13
+        Description:
+          Identifier: Tile_Y
+          Label: Tile_Y
+          GuiGroup: 
+          GuiDescription: 
+          Type: 4
+          WidgetType: 1
+        Data: 6
+        NumericalDescription:
+          DefaultValue: 6
+          MinValue: 2
+          MaxValue: 40
+          SliderStep: 0
+          SliderClamp: 1
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 0
+          EnumValues: []
+    - rid: 7947978277483185098
+      type: {class: SubstanceInputFloat3, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 14
+        Description:
+          Identifier: Marble_Color
+          Label: Marble_Color
+          GuiGroup: 
+          GuiDescription: 
+          Type: 2
+          WidgetType: 3
+        Data: {x: 0.43, y: 0.46, z: 0.47}
+        NumericalDescription:
+          DefaultValue: {x: 0.43, y: 0.46, z: 0.47}
+          MinValue: {x: 0, y: 0, z: 0}
+          MaxValue: {x: 1, y: 1, z: 1}
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []

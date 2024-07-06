@@ -141,8 +141,10 @@ MonoBehaviour:
   HasThumbnail: 0
   CurrentStatePreset: " <sbspreset pkgurl=\"pkg://Ceramic_01/Ceramic_01\" label=\"\"
     >\n  <presetinput identifier=\"$outputsize\" uid=\"369817028\" type=\"8\" value=\"10,10\"
-    />\n  <presetinput identifier=\"Tile_X\" uid=\"323218860\" type=\"4\" value=\"10\"
-    />\n  <presetinput identifier=\"Tile_Y\" uid=\"323218863\" type=\"4\" value=\"10\"
+    />\n  <presetinput identifier=\"Dirt\" uid=\"313687070\" type=\"0\" value=\"0.476\"
+    />\n  <presetinput identifier=\"Tile_X\" uid=\"323218860\" type=\"4\" value=\"15\"
+    />\n  <presetinput identifier=\"Tile_Y\" uid=\"323218863\" type=\"4\" value=\"15\"
+    />\n  <presetinput identifier=\"Tiles_Color\" uid=\"1825575952\" type=\"2\" value=\"0.340572,0.773585,0.648649\"
     />\n </sbspreset>\n"
   IsRuntimeOnly: 0
   GenerateAllOutputs: 0
@@ -232,7 +234,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 0
           WidgetType: 1
-        Data: 0
+        Data: 0.476
         NumericalDescription:
           DefaultValue: 0
           MinValue: 0
@@ -437,7 +439,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 4
           WidgetType: 1
-        Data: 10
+        Data: 15
         NumericalDescription:
           DefaultValue: 4
           MinValue: 1
@@ -459,7 +461,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 4
           WidgetType: 1
-        Data: 10
+        Data: 15
         NumericalDescription:
           DefaultValue: 4
           MinValue: 1
@@ -501,7 +503,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 2
           WidgetType: 3
-        Data: {x: 0.21, y: 0.34, z: 0.54}
+        Data: {x: 0.34057194, y: 0.7735849, z: 0.6486487}
         NumericalDescription:
           DefaultValue: {x: 0.21, y: 0.34, z: 0.54}
           MinValue: {x: 0, y: 0, z: 0}

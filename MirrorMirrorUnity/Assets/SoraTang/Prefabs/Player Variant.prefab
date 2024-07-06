@@ -63,10 +63,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6682254250055455700, guid: 459c2464979257e45a02a31de9b9d2cd,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7851028159238320672, guid: 459c2464979257e45a02a31de9b9d2cd,
         type: 3}
-      propertyPath: jumpForce
-      value: 4.5
+      propertyPath: ladderSpeed
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
