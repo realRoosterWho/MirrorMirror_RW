@@ -74,9 +74,10 @@ public class PlayerController : MonoBehaviour
         {
             float moveY = Input.GetAxis("Vertical");
             float moveX = Input.GetAxis("Horizontal");
+            
 
             rb.useGravity = false; // 关闭重力
-            Vector3 climbVelocity = new Vector3(-moveX * ladderSpeed, moveY * ladderSpeed, 0);
+            Vector3 climbVelocity = new Vector3(0, moveY * ladderSpeed, 0);
             rb.velocity = climbVelocity;
         }
         else
@@ -101,17 +102,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag(ladderTag))
+        if (other.CompareTag(ladderTag))
         {
             isOnLadder = true;
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    void OnTriggerExit(Collider other)
     {
-        if (collision.collider.CompareTag(ladderTag))
+        if (other.CompareTag(ladderTag))
         {
             isOnLadder = false;
         }

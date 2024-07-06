@@ -86,9 +86,10 @@ public class CCTVPlaneLogic : MonoBehaviour
         int textureHeight = Mathf.RoundToInt(planeHeight * 100); // 乘以100是为了增加分辨率，可以根据需要调整
 
         renderTexture = new RenderTexture(textureWidth, textureHeight, 24);
+        // renderTexture = null;
         myCamera.targetTexture = renderTexture;
 
-        planeRenderer.material = null; // 清空主材质
+        // planeRenderer.material = null; // 清空主材质
 
         if (Application.isPlaying)
         {
