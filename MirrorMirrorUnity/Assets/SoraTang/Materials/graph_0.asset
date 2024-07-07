@@ -140,7 +140,7 @@ MonoBehaviour:
   HasThumbnail: 0
   CurrentStatePreset: " <sbspreset pkgurl=\"pkg://Ceramic_02/Ceramic_02\" label=\"\"
     >\n  <presetinput identifier=\"$outputsize\" uid=\"4171069070\" type=\"8\" value=\"10,10\"
-    />\n  <presetinput identifier=\"Tiles_Color\" uid=\"2185728217\" type=\"2\" value=\"0.405838,0.849057,0.774623\"
+    />\n  <presetinput identifier=\"Tiles_Color\" uid=\"2185728217\" type=\"2\" value=\"0.592797,0.971698,0.908548\"
     />\n </sbspreset>\n"
   IsRuntimeOnly: 0
   GenerateAllOutputs: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 2
           WidgetType: 3
-        Data: {x: 0.4058383, y: 0.8490566, z: 0.7746234}
+        Data: {x: 0.5927969, y: 0.9716981, z: 0.9085479}
         NumericalDescription:
           DefaultValue: {x: 0.29, y: 0.4, z: 0.38}
           MinValue: {x: 0, y: 0, z: 0}
