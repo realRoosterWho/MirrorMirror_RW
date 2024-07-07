@@ -435,11 +435,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 7617046589848947047, guid: 3e1f4d00b3ff20149944f90307bd0cfd,
-        type: 3}
-      propertyPath: ladderSpeed
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -621,7 +616,7 @@ PrefabInstance:
     - target: {fileID: 4493977420190976160, guid: 2cf88b0228697ac409fab4056589748a,
         type: 3}
       propertyPath: m_Size.z
-      value: 0.25725803
+      value: 0.12964867
       objectReference: {fileID: 0}
     - target: {fileID: 4493977420190976160, guid: 2cf88b0228697ac409fab4056589748a,
         type: 3}
@@ -636,7 +631,7 @@ PrefabInstance:
     - target: {fileID: 4493977420190976160, guid: 2cf88b0228697ac409fab4056589748a,
         type: 3}
       propertyPath: m_Center.z
-      value: -0.035254095
+      value: 0.028550586
       objectReference: {fileID: 0}
     - target: {fileID: 4493977420190976160, guid: 2cf88b0228697ac409fab4056589748a,
         type: 3}

@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
     {
         float moveZ = Input.GetAxis("Vertical");
 
+        if (isOnLadder)
+        {
+            return;
+        }
         Vector3 move = transform.forward * moveZ;
         rb.MovePosition(transform.position + move * moveSpeed * Time.deltaTime);
     }

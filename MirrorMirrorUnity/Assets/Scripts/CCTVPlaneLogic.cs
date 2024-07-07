@@ -82,8 +82,8 @@ public class CCTVPlaneLogic : MonoBehaviour
 
         Debug.Log("planeWidth: " + planeWidth + ", planeHeight: " + planeHeight);
 
-        int textureWidth = Mathf.RoundToInt(planeWidth * 100); // 乘以100是为了增加分辨率，可以根据需要调整
-        int textureHeight = Mathf.RoundToInt(planeHeight * 100); // 乘以100是为了增加分辨率，可以根据需要调整
+        int textureWidth = Mathf.RoundToInt(planeWidth * 15); // 乘以100是为了增加分辨率，可以根据需要调整
+        int textureHeight = Mathf.RoundToInt(planeHeight * 15); // 乘以100是为了增加分辨率，可以根据需要调整
 
         renderTexture = new RenderTexture(textureWidth, textureHeight, 24);
         // renderTexture = null;
