@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.1831089, g: 0.22878066, b: 0.30663276, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -613,36 +614,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4493977420190976160, guid: 2cf88b0228697ac409fab4056589748a,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.82506263
-      objectReference: {fileID: 0}
-    - target: {fileID: 4493977420190976160, guid: 2cf88b0228697ac409fab4056589748a,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 0.25725803
-      objectReference: {fileID: 0}
-    - target: {fileID: 4493977420190976160, guid: 2cf88b0228697ac409fab4056589748a,
-        type: 3}
-      propertyPath: m_Center.x
-      value: -0.23439959
-      objectReference: {fileID: 0}
-    - target: {fileID: 4493977420190976160, guid: 2cf88b0228697ac409fab4056589748a,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 2.999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4493977420190976160, guid: 2cf88b0228697ac409fab4056589748a,
-        type: 3}
-      propertyPath: m_Center.z
-      value: -0.035254095
-      objectReference: {fileID: 0}
-    - target: {fileID: 4493977420190976160, guid: 2cf88b0228697ac409fab4056589748a,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5577565514371055393, guid: 2cf88b0228697ac409fab4056589748a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1168,12 +1139,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!81 &518074295
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1195,6 +1166,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 147004597}
   m_LocalEulerAnglesHint: {x: 32.865, y: -63.211, z: 11.884}
 --- !u!1 &581732007
 GameObject:
@@ -1409,12 +1381,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!81 &641924609
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1436,6 +1408,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 32.865, y: -63.211, z: 11.884}
 --- !u!1 &652940234
 GameObject:
@@ -1602,7 +1575,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1614,8 +1587,6 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_Father: {fileID: 0}
-  m_Father: {fileID: 0}
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -1631,7 +1602,7 @@ Transform:
   m_GameObject: {fileID: 683705746}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2279483, y: -0.31960842, z: 0.07793572, w: 0.9164148}
-  m_LocalPosition: {x: 15.851037, y: 19.919678, z: -21.040186}
+  m_LocalPosition: {x: 15.851037, y: 21.84, z: -21.040186}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1660,7 +1631,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1675,12 +1646,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &850699736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,7 +1756,7 @@ Transform:
   m_LocalScale: {x: 1.6126499, y: 1, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 602300789}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 90}
 --- !u!21 &873477683
 Material:
@@ -2137,12 +2108,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!81 &1008218671
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2164,7 +2135,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1555907146}
   m_LocalEulerAnglesHint: {x: 32.865, y: -63.211, z: 11.884}
 --- !u!1 &1011102161
 GameObject:
@@ -3221,7 +3192,7 @@ Transform:
   m_LocalScale: {x: 1.6, y: 1, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 622344979}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 90}
 --- !u!1 &1409252819
 GameObject:
@@ -3436,12 +3407,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!81 &1523955506
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3624,12 +3595,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!81 &1702187333
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3651,8 +3622,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_LocalEulerAnglesHint: {x: 6.221, y: 60.855, z: -0.166}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 6.221, y: 60.855, z: -0.166}
 --- !u!1001 &1741966181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4637,8 +4608,6 @@ SceneRoots:
   - {fileID: 1896571893}
   - {fileID: 1043179614}
   - {fileID: 131945538}
-  - {fileID: 602300789}
-  - {fileID: 622344979}
   - {fileID: 1333669731}
   - {fileID: 1555907146}
   - {fileID: 147004597}
@@ -4646,3 +4615,8 @@ SceneRoots:
   - {fileID: 2002571627}
   - {fileID: 321361071}
   - {fileID: 2062781929}
+  - {fileID: 1741966181}
+  - {fileID: 641924610}
+  - {fileID: 850699740}
+  - {fileID: 1399511424}
+  - {fileID: 1702187334}

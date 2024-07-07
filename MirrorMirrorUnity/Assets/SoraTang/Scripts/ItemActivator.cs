@@ -8,7 +8,10 @@ public class ItemActivator : MonoBehaviour
     public GameObject[] itemsToDeactivate; // 需要禁用的物品
     public GameObject[] itemsToScale; // 需要从零缩放到设定大小的物品
     public Vector3[] targetScales; // 每个物体的目标缩放大小
+    public GameObject[] itemsToMove; // 需要移动的物品
+    public Vector3[] targetPositions; // 每个物体的目标位置
     public float scaleDuration = 1f;  // 缩放持续时间
+    public float moveDuration = 1f;  // 移动持续时间
 
     void OnTriggerEnter(Collider other)
     {
@@ -17,6 +20,7 @@ public class ItemActivator : MonoBehaviour
             ActivateItems();
             DeactivateItems();
             StartScalingItems();
+            StartMovingItems();
         }
     }
 
@@ -66,5 +70,31 @@ public class ItemActivator : MonoBehaviour
         }
 
         item.transform.localScale = toScale;
+    }
+
+    void StartMovingItems()
+    {
+        for (int i = 0; i < itemsToMove.Length; i++)
+        {
+            if (itemsToMove[i] != null)
+            {
+                StartCoroutine(MoveItem(itemsToMove[i], itemsToMove[i].transform.position, targetPositions[i], moveDuration));
+            }
+        }
+    }
+
+    IEnumerator MoveItem(GameObject item, Vector3 fromPosition, Vector3 toPosition, float duration)
+    {
+        float elapsedTime = 0f;
+        item.transform.position = fromPosition;
+
+        while (elapsedTime < duration)
+        {
+            item.transform.position = Vector3.Lerp(fromPosition, toPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        item.transform.position = toPosition;
     }
 }
