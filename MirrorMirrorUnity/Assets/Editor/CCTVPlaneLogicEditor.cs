@@ -18,15 +18,15 @@ public class CCTVPlaneLogicEditor : Editor
             SceneView.duringSceneGui += OnSceneGUI;
         }
 
-        if (GUILayout.Button("Update RenderTextureON"))
+		if (GUILayout.Button("Adjust Plane Size And Render Texture"))
         {
-            cctvLogic.UpdateRenderTexture(true);
+            cctvLogic.AdjustPlaneSizeAndRenderTexture(true);
+        }
+		if (GUILayout.Button("Adjust Plane Size And Render Texture but False"))
+        {
+            cctvLogic.AdjustPlaneSizeAndRenderTexture(false);
         }
         
-        if (GUILayout.Button("Update RenderTextureOff"))
-        {
-            cctvLogic.UpdateRenderTexture(false);
-        }
     }
 
     private void OnSceneGUI(SceneView sceneView)

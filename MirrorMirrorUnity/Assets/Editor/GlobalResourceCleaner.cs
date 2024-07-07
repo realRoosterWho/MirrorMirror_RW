@@ -4,7 +4,7 @@ using System.Collections;
 
 public class GlobalResourceCleaner : EditorWindow
 {
-    private const int BatchSize = 10; // 每次处理的对象数量
+    private const int BatchSize = 100; // 每次处理的对象数量
     private IEnumerator cleanupCoroutine;
 
     [MenuItem("Tools/Global Resource Cleaner")]
@@ -15,73 +15,78 @@ public class GlobalResourceCleaner : EditorWindow
 
     void OnGUI()
     {
-        if (GUILayout.Button("Clean Up All RenderTextures and Materials"))
+        if (GUILayout.Button("Clean Up Specific RenderTextures"))
         {
-            StartCleanup();
+            StartCleanup(SpecificRenderTextureCleanupCoroutine);
         }
     }
 
-    private void StartCleanup()
+    private void StartCleanup(System.Func<IEnumerator> coroutineFunc)
     {
-        cleanupCoroutine = CleanUpCoroutine();
+        cleanupCoroutine = coroutineFunc();
         EditorApplication.update += OnEditorUpdate;
     }
 
     private void OnEditorUpdate()
     {
-        if (cleanupCoroutine != null && !cleanupCoroutine.MoveNext())
+        try
         {
+            if (cleanupCoroutine != null && !cleanupCoroutine.MoveNext())
+            {
+                cleanupCoroutine = null;
+                EditorApplication.update -= OnEditorUpdate;
+                Debug.Log("Cleanup completed.");
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Exception during cleanup: {ex}");
             cleanupCoroutine = null;
             EditorApplication.update -= OnEditorUpdate;
-            Debug.Log("Cleanup completed.");
         }
     }
 
-    private IEnumerator CleanUpCoroutine()
+    private IEnumerator SpecificRenderTextureCleanupCoroutine()
     {
-        // 分批次清理 RenderTextures
+        string[] patterns = { "_CameraDepthAttachment_", "_CameraDepthTexture_","Camera","_SSAO" }; // 模式列表
         RenderTexture[] allRenderTextures = Resources.FindObjectsOfTypeAll<RenderTexture>();
-        for (int i = 0; i < allRenderTextures.Length; i += BatchSize)
+
+        for (int i = 0; i < allRenderTextures.Length; i++)
         {
-            for (int j = i; j < i + BatchSize && j < allRenderTextures.Length; j++)
+            RenderTexture rt = allRenderTextures[i];
+            if (rt != null && !EditorUtility.IsPersistent(rt) && MatchesAnyPattern(rt.name, patterns))
             {
-                RenderTexture rt = allRenderTextures[j];
-                if (rt != null)
+                Debug.Log($"Destroying RenderTexture: {rt.name}");
+                try
                 {
-                    Debug.Log($"Destroying RenderTexture: {rt.name}");
                     rt.Release();
                     DestroyImmediate(rt, true);
                 }
-            }
-
-            // 每批次后进行垃圾回收
-            Resources.UnloadUnusedAssets();
-            System.GC.Collect();
-
-            // 等待下一帧
-            yield return null;
-        }
-
-        // 分批次清理 Materials
-        Material[] allMaterials = Resources.FindObjectsOfTypeAll<Material>();
-        for (int i = 0; i < allMaterials.Length; i += BatchSize)
-        {
-            for (int j = i; j < i + BatchSize && j < allMaterials.Length; j++)
-            {
-                Material mat = allMaterials[j];
-                if (mat != null)
+                catch (System.Exception ex)
                 {
-                    Debug.Log($"Destroying Material: {mat.name}");
-                    DestroyImmediate(mat, true);
+                    Debug.LogError($"Failed to destroy RenderTexture {rt.name}: {ex}");
                 }
             }
 
-            // 每批次后进行垃圾回收
-            Resources.UnloadUnusedAssets();
-            System.GC.Collect();
-
-            // 等待下一帧
-            yield return null;
+            // 每个对象后进行垃圾回收并等待
+            if (i % BatchSize == 0)
+            {
+                Resources.UnloadUnusedAssets();
+                System.GC.Collect();
+                yield return null;
+            }
         }
+    }
+
+    private bool MatchesAnyPattern(string name, string[] patterns)
+    {
+        foreach (string pattern in patterns)
+        {
+            if (name.Contains(pattern))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

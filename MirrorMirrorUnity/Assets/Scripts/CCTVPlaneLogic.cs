@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class CCTVPlaneLogic : MonoBehaviour
 {
-    public Camera myCamera; // 公开的摄像机变量
-    public GameObject m_Plane; // 公开的目标物体变量
-    public bool invertDimensions; // 公开的布尔变量决定是否调转宽高
-    private RenderTexture renderTexture; // RenderTexture变量
-    public GameObject cctvPrefab; // CCTV Prefab
+    public Camera myCamera;
+    public GameObject m_Plane;
+    public bool invertDimensions;
+    private RenderTexture renderTexture;
+    public GameObject cctvPrefab;
 
     public bool isSummonRevert = false;
 
@@ -17,11 +17,13 @@ public class CCTVPlaneLogic : MonoBehaviour
 
     void OnDisable()
     {
+        CleanUpSpecificRenderTextures();
         ReleaseRenderTexture();
     }
 
     void OnDestroy()
     {
+        CleanUpSpecificRenderTextures();
         ReleaseRenderTexture();
     }
 
@@ -33,38 +35,12 @@ public class CCTVPlaneLogic : MonoBehaviour
             {
                 myCamera.targetTexture = null;
             }
-            RenderTexture.ReleaseTemporary(renderTexture);
+            renderTexture.Release();
+            DestroyImmediate(renderTexture, true);
             renderTexture = null;
         }
     }
-
-    void AdjustCameraViewport(float planeWidth, float planeHeight)
-    {
-        float targetAspect = planeWidth / planeHeight;
-        float windowAspect = (float)Screen.width / (float)Screen.height;
-        float scaleHeight = windowAspect / targetAspect;
-
-        if (scaleHeight < 1.0f)
-        {
-            Rect rect = myCamera.rect;
-            rect.width = 1.0f;
-            rect.height = scaleHeight;
-            rect.x = 0;
-            rect.y = (1.0f - scaleHeight) / 2.0f;
-            myCamera.rect = rect;
-        }
-        else
-        {
-            float scaleWidth = 1.0f / scaleHeight;
-            Rect rect = myCamera.rect;
-            rect.width = scaleWidth;
-            rect.height = 1.0f;
-            rect.x = (1.0f - scaleWidth) / 2.0f;
-            rect.y = 0;
-            myCamera.rect = rect;
-        }
-    }
-
+    
     public void AdjustPlaneSizeAndRenderTexture(bool isRender = false)
     {
         Renderer planeRenderer = m_Plane.GetComponent<Renderer>();
@@ -101,41 +77,26 @@ public class CCTVPlaneLogic : MonoBehaviour
             planeHeight = temp;
         }
 
-        Debug.Log("planeWidth: " + planeWidth + ", planeHeight: " + planeHeight);
+        int textureWidth = Mathf.RoundToInt(planeWidth * 15);
+        int textureHeight = Mathf.RoundToInt(planeHeight * 15);
 
-        int textureWidth = Mathf.RoundToInt(planeWidth * 100); // 乘以100是为了增加分辨率，可以根据需要调整
-        int textureHeight = Mathf.RoundToInt(planeHeight * 100); // 乘以100是为了增加分辨率，可以根据需要调整
-
-        // 释放之前的临时RenderTexture
-        ReleaseRenderTexture();
-
-        // 获取新的临时RenderTexture
-        renderTexture = RenderTexture.GetTemporary(textureWidth, textureHeight, 24);
-        Debug.Log("Texture Size: " + renderTexture.width + "x" + renderTexture.height);
-
-        myCamera.targetTexture = renderTexture;
-
-        if (Application.isPlaying)
+        if (renderTexture == null || renderTexture.width != textureWidth || renderTexture.height != textureHeight)
         {
-            planeRenderer.material.mainTexture = renderTexture;
-        }
+            ReleaseRenderTexture();
 
+            renderTexture = new RenderTexture(textureWidth, textureHeight, 24);
+            renderTexture.Create();
+            myCamera.targetTexture = renderTexture;
+        }
+        
         if (isRender)
         {
             planeRenderer.material.mainTexture = renderTexture;
         }
         else
         {
-            planeRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Lit")); // 占位材质
+            planeRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
         }
-
-        // 调整摄像机的视野
-        // AdjustCameraViewport(planeWidth, planeHeight);
-    }
-
-    public void UpdateRenderTexture(bool isRender)
-    {
-        AdjustPlaneSizeAndRenderTexture(isRender);
     }
 
     public void AddCCTVPlaneOnSurface(GameObject targetObject, Vector3 hitPoint, Vector3 hitNormal)
@@ -178,8 +139,7 @@ public class CCTVPlaneLogic : MonoBehaviour
             planeWidth = targetRenderer.bounds.size.x;
             planeHeight = targetRenderer.bounds.size.z;
             planeCenter = targetRenderer.bounds.center + new Vector3(0, hitNormal.y * targetRenderer.bounds.extents.y, 0);
-            rotation = Quaternion.LookRotation(hitNormal, Vector3.up) * Quaternion.Euler(90, 0, 0); // 旋转
-            Debug.Log("x,z");
+            rotation = Quaternion.LookRotation(hitNormal, Vector3.up) * Quaternion.Euler(90, 0, 0);
         }
         else if (Mathf.Abs(hitNormal.x) > Mathf.Abs(hitNormal.y) && Mathf.Abs(hitNormal.x) > Mathf.Abs(hitNormal.z))
         {
@@ -187,7 +147,6 @@ public class CCTVPlaneLogic : MonoBehaviour
             planeHeight = targetRenderer.bounds.size.y;
             planeCenter = targetRenderer.bounds.center + new Vector3(hitNormal.x * targetRenderer.bounds.extents.x, 0, 0);
             rotation = Quaternion.LookRotation(hitNormal, Vector3.up) * Quaternion.Euler(90, 0, 0);
-            Debug.Log("z,y");
         }
         else
         {
@@ -195,13 +154,12 @@ public class CCTVPlaneLogic : MonoBehaviour
             planeHeight = targetRenderer.bounds.size.y;
             planeCenter = targetRenderer.bounds.center + new Vector3(0, 0, hitNormal.z * targetRenderer.bounds.extents.z);
             rotation = Quaternion.LookRotation(hitNormal, Vector3.up) * Quaternion.Euler(-90, 0, 0);
-            Debug.Log("x,y");
         }
 
         float standardPlaneSize = 10.0f;
-        planeTransform.localScale = new Vector3(planeWidth / standardPlaneSize, 1.0f, planeHeight / standardPlaneSize); // 调整比例基于标准尺寸
+        planeTransform.localScale = new Vector3(planeWidth / standardPlaneSize, 1.0f, planeHeight / standardPlaneSize);
 
-        planeTransform.position = planeCenter + hitNormal * offset; // 添加微小的偏移量
+        planeTransform.position = planeCenter + hitNormal * offset;
         planeTransform.rotation = rotation;
 
         if (isSummonRevert)
@@ -209,7 +167,39 @@ public class CCTVPlaneLogic : MonoBehaviour
             cctvInstance.GetComponent<CCTVPlaneLogic>().invertDimensions = true;
         }
 
-        cctvInstance.GetComponent<CCTVPlaneLogic>().m_Plane = planeTransform.gameObject; // 确保引用正确的 plane 对象
+        cctvInstance.GetComponent<CCTVPlaneLogic>().m_Plane = planeTransform.gameObject;
         cctvInstance.GetComponent<CCTVPlaneLogic>().AdjustPlaneSizeAndRenderTexture();
+    }
+
+    // 静态方法清理特定模式的 RenderTexture
+    public static void CleanUpSpecificRenderTextures()
+    {
+        string[] patterns = { "_CameraDepthAttachment_", "_CameraDepthTexture_","_Camera","_SSAO" };
+        RenderTexture[] allRenderTextures = Resources.FindObjectsOfTypeAll<RenderTexture>();
+
+        foreach (var rt in allRenderTextures)
+        {
+            if (rt != null && MatchesAnyPattern(rt.name, patterns))
+            {
+                Debug.Log($"Destroying RenderTexture: {rt.name}");
+                rt.Release();
+                DestroyImmediate(rt, true);
+            }
+        }
+
+        Resources.UnloadUnusedAssets();
+        System.GC.Collect();
+    }
+
+    private static bool MatchesAnyPattern(string name, string[] patterns)
+    {
+        foreach (string pattern in patterns)
+        {
+            if (name.Contains(pattern))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
