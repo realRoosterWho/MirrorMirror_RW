@@ -4,15 +4,29 @@ using UnityEngine.SceneManagement;
 public class SceneSwitcher : MonoBehaviour
 {
     public string playerTag = "Player";  // 玩家对象的Tag
+    public bool loadSpecificScene = false;  // 是否加载指定场景
+    public string sceneName;  // 指定场景名称
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(playerTag))
         {
-            LoadNextScene();
+            LoadScene(loadSpecificScene);
         }
     }
 
+    void LoadScene(bool isSpecific)
+    {
+        if (isSpecific)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            LoadNextScene();
+        }
+    }
+    
     void LoadNextScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;

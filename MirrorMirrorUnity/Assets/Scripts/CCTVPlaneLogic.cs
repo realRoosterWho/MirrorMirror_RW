@@ -10,13 +10,34 @@ public class CCTVPlaneLogic : MonoBehaviour
 
     public bool isSummonRevert = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         AdjustPlaneSizeAndRenderTexture(true);
     }
 
-    // 调整摄像机的视野以匹配RenderTexture的宽高比
+    void OnDisable()
+    {
+        ReleaseRenderTexture();
+    }
+
+    void OnDestroy()
+    {
+        ReleaseRenderTexture();
+    }
+
+    private void ReleaseRenderTexture()
+    {
+        if (renderTexture != null)
+        {
+            if (myCamera.targetTexture == renderTexture)
+            {
+                myCamera.targetTexture = null;
+            }
+            RenderTexture.ReleaseTemporary(renderTexture);
+            renderTexture = null;
+        }
+    }
+
     void AdjustCameraViewport(float planeWidth, float planeHeight)
     {
         float targetAspect = planeWidth / planeHeight;
@@ -44,7 +65,6 @@ public class CCTVPlaneLogic : MonoBehaviour
         }
     }
 
-    // 提取的公共方法
     public void AdjustPlaneSizeAndRenderTexture(bool isRender = false)
     {
         Renderer planeRenderer = m_Plane.GetComponent<Renderer>();
@@ -53,6 +73,7 @@ public class CCTVPlaneLogic : MonoBehaviour
             Debug.LogError("Plane Renderer not found!");
             return;
         }
+
         float planeWidth = planeRenderer.bounds.size.x;
         float planeHeight = planeRenderer.bounds.size.y;
         float planeDepth = planeRenderer.bounds.size.z;
@@ -82,21 +103,24 @@ public class CCTVPlaneLogic : MonoBehaviour
 
         Debug.Log("planeWidth: " + planeWidth + ", planeHeight: " + planeHeight);
 
-        int textureWidth = Mathf.RoundToInt(planeWidth * 15); // 乘以100是为了增加分辨率，可以根据需要调整
-        int textureHeight = Mathf.RoundToInt(planeHeight * 15); // 乘以100是为了增加分辨率，可以根据需要调整
+        int textureWidth = Mathf.RoundToInt(planeWidth * 100); // 乘以100是为了增加分辨率，可以根据需要调整
+        int textureHeight = Mathf.RoundToInt(planeHeight * 100); // 乘以100是为了增加分辨率，可以根据需要调整
 
-        renderTexture = new RenderTexture(textureWidth, textureHeight, 24);
-        // renderTexture = null;
+        // 释放之前的临时RenderTexture
+        ReleaseRenderTexture();
+
+        // 获取新的临时RenderTexture
+        renderTexture = RenderTexture.GetTemporary(textureWidth, textureHeight, 24);
+        Debug.Log("Texture Size: " + renderTexture.width + "x" + renderTexture.height);
+
         myCamera.targetTexture = renderTexture;
-
-        // planeRenderer.material = null; // 清空主材质
 
         if (Application.isPlaying)
         {
             planeRenderer.material.mainTexture = renderTexture;
         }
 
-        if(isRender)
+        if (isRender)
         {
             planeRenderer.material.mainTexture = renderTexture;
         }
@@ -175,7 +199,7 @@ public class CCTVPlaneLogic : MonoBehaviour
         }
 
         float standardPlaneSize = 10.0f;
-        planeTransform.localScale = new Vector3(planeWidth / standardPlaneSize, 1.0f, planeHeight / standardPlaneSize); // Adjust scale based on standard size
+        planeTransform.localScale = new Vector3(planeWidth / standardPlaneSize, 1.0f, planeHeight / standardPlaneSize); // 调整比例基于标准尺寸
 
         planeTransform.position = planeCenter + hitNormal * offset; // 添加微小的偏移量
         planeTransform.rotation = rotation;
