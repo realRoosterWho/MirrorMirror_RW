@@ -41,54 +41,71 @@ public class CCTVPlaneLogic : MonoBehaviour
         }
     }
     
-    public void AdjustPlaneSizeAndRenderTexture(bool isRender = false)
+public void AdjustPlaneSizeAndRenderTexture(bool isRender = false)
+{
+    Renderer planeRenderer = m_Plane.GetComponent<Renderer>();
+    if (planeRenderer == null)
     {
-        Renderer planeRenderer = m_Plane.GetComponent<Renderer>();
-        if (planeRenderer == null)
-        {
-            Debug.LogError("Plane Renderer not found!");
-            return;
-        }
+        Debug.LogError("Plane Renderer not found!");
+        return;
+    }
 
-        float planeWidth = planeRenderer.bounds.size.x;
-        float planeHeight = planeRenderer.bounds.size.y;
-        float planeDepth = planeRenderer.bounds.size.z;
+    float planeWidth = planeRenderer.bounds.size.x;
+    float planeHeight = planeRenderer.bounds.size.y;
+    float planeDepth = planeRenderer.bounds.size.z;
 
-        if (planeWidth < planeHeight && planeWidth < planeDepth)
+    if (planeWidth < planeHeight && planeWidth < planeDepth)
+    {
+        planeWidth = planeRenderer.bounds.size.y;
+        planeHeight = planeRenderer.bounds.size.z;
+    }
+    else if (planeHeight < planeWidth && planeHeight < planeDepth)
+    {
+        planeWidth = planeRenderer.bounds.size.x;
+        planeHeight = planeRenderer.bounds.size.z;
+    }
+    else
+    {
+        planeWidth = planeRenderer.bounds.size.x;
+        planeHeight = planeRenderer.bounds.size.y;
+    }
+
+    if (invertDimensions)
+    {
+        float temp = planeWidth;
+        planeWidth = planeHeight;
+        planeHeight = temp;
+    }
+
+    int textureWidth = Mathf.RoundToInt(planeWidth * 15);
+    int textureHeight = Mathf.RoundToInt(planeHeight * 15);
+
+    if (renderTexture == null || renderTexture.width != textureWidth || renderTexture.height != textureHeight)
+    {
+        ReleaseRenderTexture();
+
+        renderTexture = new RenderTexture(textureWidth, textureHeight, 24);
+        renderTexture.Create();
+        myCamera.targetTexture = renderTexture;
+    }
+
+    if (Application.isEditor)
+    {
+        // 编辑模式下，创建一个新的材质实例
+        if (isRender)
         {
-            planeWidth = planeRenderer.bounds.size.y;
-            planeHeight = planeRenderer.bounds.size.z;
-        }
-        else if (planeHeight < planeWidth && planeHeight < planeDepth)
-        {
-            planeWidth = planeRenderer.bounds.size.x;
-            planeHeight = planeRenderer.bounds.size.z;
+            Material newMaterial = new Material(planeRenderer.sharedMaterial);
+            newMaterial.mainTexture = renderTexture;
+            planeRenderer.sharedMaterial = newMaterial;
         }
         else
         {
-            planeWidth = planeRenderer.bounds.size.x;
-            planeHeight = planeRenderer.bounds.size.y;
+            planeRenderer.sharedMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit"));
         }
-
-        if (invertDimensions)
-        {
-            float temp = planeWidth;
-            planeWidth = planeHeight;
-            planeHeight = temp;
-        }
-
-        int textureWidth = Mathf.RoundToInt(planeWidth * 15);
-        int textureHeight = Mathf.RoundToInt(planeHeight * 15);
-
-        if (renderTexture == null || renderTexture.width != textureWidth || renderTexture.height != textureHeight)
-        {
-            ReleaseRenderTexture();
-
-            renderTexture = new RenderTexture(textureWidth, textureHeight, 24);
-            renderTexture.Create();
-            myCamera.targetTexture = renderTexture;
-        }
-        
+    }
+    else
+    {
+        // 运行时使用 material
         if (isRender)
         {
             planeRenderer.material.mainTexture = renderTexture;
@@ -98,6 +115,8 @@ public class CCTVPlaneLogic : MonoBehaviour
             planeRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
         }
     }
+}
+
 
     public void AddCCTVPlaneOnSurface(GameObject targetObject, Vector3 hitPoint, Vector3 hitNormal)
     {
