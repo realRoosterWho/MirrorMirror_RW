@@ -48,7 +48,7 @@ public class GlobalResourceCleaner : EditorWindow
 
     private IEnumerator SpecificRenderTextureCleanupCoroutine()
     {
-        string[] patterns = { "_CameraDepthAttachment_", "_CameraDepthTexture_","Camera","_SSAO" }; // 模式列表
+        string[] patterns = { "_CameraDepthAttachment_", "_CameraDepthTexture_","Camera","_SSAO","_AfterPost" }; // 模式列表
         RenderTexture[] allRenderTextures = Resources.FindObjectsOfTypeAll<RenderTexture>();
 
         for (int i = 0; i < allRenderTextures.Length; i++)
